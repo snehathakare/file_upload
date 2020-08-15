@@ -1,0 +1,2 @@
+class ImageAttrib < ApplicationRecord
+end
