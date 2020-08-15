@@ -1,3 +1,5 @@
+require "CSV"
+
 class ImageAttribsController < ApplicationController
   before_action :set_image_attrib, only: [:show, :update, :destroy]
 
@@ -27,13 +29,13 @@ class ImageAttribsController < ApplicationController
   # PATCH/PUT /image_attribs/1
   # PATCH/PUT /image_attribs/1.json
   def update
-    if @image_attrib.update(image_attrib_params)
-      render :show, status: :ok, location: @image_attrib
-    else
-      render json: @image_attrib.errors, status: :unprocessable_entity
-    end
-  end
+    temp_file = JSON.parse(@image_attrib.file.download)
 
+    send_data(
+      CSV.generate(headers: true) { |csv| temp_file.map(&:to_a).each { |row| csv << row } },
+      filename: "Converted CSV file #{Date.current}.csv"
+    )
+  end
   # DELETE /image_attribs/1
   # DELETE /image_attribs/1.json
   def destroy
@@ -48,6 +50,6 @@ class ImageAttribsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def image_attrib_params
-      params.require(:image_attrib).permit(:description)
+      params.require(:image_attrib).permit(:description, :file)
     end
 end
