@@ -7,11 +7,11 @@ import CSVReader from 'react-csv-reader'
 
 class Upload extends React.Component {
   state = { 
-      // Initially, no file is selected 
+      // Initially, no file is selected
       selectedFile: null
     }; 
      
-    // On file select (from the pop up) 
+    // On file select (from the pop up)
     onFileChange = event => { 
      
       // Update the state 
@@ -35,7 +35,7 @@ class Upload extends React.Component {
       // Send formData object 
       axios({ 
         method: 'post',
-        url: "http://localhost:3000/image_attribs", 
+        url: "https://json2csv-upload.herokuapp.com/image_attribs",
         data: formData,
         headers: { Accept: 'application/json', 'Content-Type': 'multipart/form-data', },
       }).then(res => {

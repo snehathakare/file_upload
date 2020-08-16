@@ -10,7 +10,7 @@ class Download extends React.Component {
   
   downloadCsv = () => {
     axios({
-      url: 'http://localhost:3000/image_attribs/latest',
+      url: 'https://json2csv-upload.herokuapp.com/image_attribs/latest',
       method: 'PUT',
       responseType: 'blob', // important
       headers: { Accept: 'application/json', 'Content-Type': 'multipart/form-data', }
