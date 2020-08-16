@@ -26,8 +26,7 @@ class Download extends React.Component {
   render() {
     return (
       <div id="container">
-        <h1>Download File using React App</h1>
-        <h3>Download Employee Data using Button</h3>
+        <h3>Download File using Button</h3>
         <button onClick={this.downloadCsv}>Download</button>
         <p/>
       </div>

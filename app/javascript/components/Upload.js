@@ -1,6 +1,9 @@
 import React from "react"
 import axios from 'axios'
 import Download from './Download'
+import history from './history';
+import Routes from './Routes';
+import CSVReader from 'react-csv-reader'
 
 class Upload extends React.Component {
 
@@ -63,13 +66,6 @@ class Upload extends React.Component {
             </p> 
           </div> 
         ); 
-      } else { 
-        return ( 
-          <div> 
-            <br /> 
-            <h5>Choose before Pressing the Upload button</h5> 
-          </div> 
-        ); 
       } 
     }; 
      
@@ -84,6 +80,7 @@ class Upload extends React.Component {
                 <button onClick={this.onFileUpload}> 
                   Upload! 
                 </button> 
+                <h2>Render csv here</h2>
                 <Download />
             </div> 
           {this.fileData()} 
