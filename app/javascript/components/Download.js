@@ -5,11 +5,12 @@ import axios from 'axios'
 class Download extends React.Component {
   constructor(props) {
     super(props);
+
   }
   
   downloadCsv = () => {
     axios({
-      url: 'http://localhost:3000/image_attribs/20',
+      url: 'http://localhost:3000/image_attribs/latest',
       method: 'PUT',
       responseType: 'blob', // important
       headers: { Accept: 'application/json', 'Content-Type': 'multipart/form-data', }

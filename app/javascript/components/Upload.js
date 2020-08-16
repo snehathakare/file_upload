@@ -6,9 +6,7 @@ import Routes from './Routes';
 import CSVReader from 'react-csv-reader'
 
 class Upload extends React.Component {
-
   state = { 
-  
       // Initially, no file is selected 
       selectedFile: null
     }; 
@@ -18,7 +16,6 @@ class Upload extends React.Component {
      
       // Update the state 
       this.setState({ selectedFile: event.target.files[0] }); 
-     
     }; 
      
     // On file upload (click the upload button) 
@@ -33,10 +30,7 @@ class Upload extends React.Component {
         this.state.selectedFile, 
         this.state.selectedFile.name 
       ); 
-     
-      // Details of the uploaded file 
-      console.log(this.state.selectedFile); 
-     
+
       // Request made to the backend api 
       // Send formData object 
       axios({ 
@@ -45,48 +39,47 @@ class Upload extends React.Component {
         data: formData,
         headers: { Accept: 'application/json', 'Content-Type': 'multipart/form-data', },
       }).then(res => {
-        console.log(res);
-        console.log(res.data);
+        //console.log(res);
+        //console.log(res.data.id);
       }); 
     }; 
      
     // File content to be displayed after 
     // file upload is complete 
-    fileData = () => { 
-     
+    fileData = () => {
       if (this.state.selectedFile) {  
-        return ( 
-          <div> 
+        return (
+          <div>
             <h2>File Details:</h2> 
-            <p>File Name: {this.state.selectedFile.name}</p> 
-            <p>File Type: {this.state.selectedFile.type}</p> 
-            <p> 
-              Last Modified:{" "} 
-              {this.state.selectedFile.lastModifiedDate.toDateString()} 
-            </p> 
+            <p>File Name: {this.state.selectedFile.name}</p>
+            <p>File Type: {this.state.selectedFile.type}</p>
+            <p>
+              Last Modified:{" "}
+              {this.state.selectedFile.lastModifiedDate.toDateString()}
+            </p>
           </div> 
         ); 
       } 
     }; 
-     
+
     render() { 
       return ( 
         <div>  
             <h3> 
-              File Upload using React! 
-            </h3> 
-            <div> 
-                <input type="file" name="image_attrib[file]" onChange={this.onFileChange} /> 
-                <button onClick={this.onFileUpload}> 
-                  Upload! 
-                </button> 
+              File Upload using React!
+            </h3>
+            <div>
+                <input type="file" name="image_attrib[file]" onChange={this.onFileChange} />
+                <button onClick={this.onFileUpload}>
+                  Upload!
+                </button>
                 <h2>Render csv here</h2>
-                <Download />
+                <Download dataObject={this.state.fileId} />
             </div> 
-          {this.fileData()} 
+          {this.fileData()}
         </div> 
-      ); 
-    } 
+      );
+    }
 }
 
 export default Upload
