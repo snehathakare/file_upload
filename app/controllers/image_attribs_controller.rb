@@ -1,4 +1,4 @@
-require "CSV"
+require "csv"
 
 class ImageAttribsController < ApplicationController
   before_action :set_image_attrib, only: [:show, :update, :destroy]
