@@ -15,10 +15,14 @@ class ImageAttribsController < ApplicationController
   end
 
   def latest
-    @image_attrib = ImageAttrib.last
+    image_attrib = ImageAttrib.last
 
-    if @image_attrib.present?
-      render :show, status: :ok, location: @image_attrib
+    if image_attrib.present?
+      generator = ProcessCsv.new(image_attrib)
+      send_data(
+        generator.generate,
+        filename: "Converted CSV file #{Date.current}.csv"
+      )
     else
       render json: "No image attribute record found", status: :not_found
     end
