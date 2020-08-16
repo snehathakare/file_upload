@@ -29,10 +29,10 @@ class ImageAttribsController < ApplicationController
   # PATCH/PUT /image_attribs/1
   # PATCH/PUT /image_attribs/1.json
   def update
-    temp_file = JSON.parse(@image_attrib.file.download)
+    generator = ProcessCsv.new(@image_attrib)
 
     send_data(
-      CSV.generate(headers: true) { |csv| temp_file.map(&:to_a).each { |row| csv << row } },
+      generator.generate,
       filename: "Converted CSV file #{Date.current}.csv"
     )
   end
