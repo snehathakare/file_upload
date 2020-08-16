@@ -14,6 +14,16 @@ class ImageAttribsController < ApplicationController
   def show
   end
 
+  def latest
+    @image_attrib = ImageAttrib.last
+
+    if @image_attrib.present?
+      render :show, status: :ok, location: @image_attrib
+    else
+      render json: "No image attribute record found", status: :not_found
+    end
+  end
+
   # POST /image_attribs
   # POST /image_attribs.json
   def create
